@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.7</version>
+		<version>3.5.13</version>
 	</parent>
 
 	<groupId>jkml</groupId>
@@ -17,7 +17,7 @@
 
 	<properties>
 		<java.version>17</java.version>
-		<cassandra.version>4.0.19</cassandra.version>
+		<cassandra.version>4.0.20</cassandra.version>
 		<cassandra-unit.version>4.3.1.0</cassandra-unit.version>
 		<jamm.version>0.4.0</jamm.version>
 		<jna.version>5.18.1</jna.version>
@@ -116,7 +116,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<argLine>
-						<!-- From https://github.com/apache/cassandra/blob/cassandra-4.0.17/conf/jvm11-clients.options -->
+						<!-- From https://github.com/apache/cassandra/blob/cassandra-4.0.20/conf/jvm11-clients.options -->
 						--add-exports java.base/jdk.internal.misc=ALL-UNNAMED
 						--add-exports java.base/jdk.internal.ref=ALL-UNNAMED
 						--add-exports java.base/sun.nio.ch=ALL-UNNAMED

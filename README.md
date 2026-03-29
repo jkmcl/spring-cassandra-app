@@ -18,12 +18,12 @@ Features:
 
 # Changes to CassandraUnit
 
-Customized version of `cu-cassandra.yaml` that CassandraUnit reads from the class path in `src/test/resources/cu-cassandra.yaml`. This version is based on the default `cassandra.yaml` from Cassandra 4.0.19.
+Customized version of `cu-cassandra.yaml` that CassandraUnit reads from the class path in `src/test/resources/cu-cassandra.yaml`. This version is based on the default `cassandra.yaml` from Cassandra 4.0.20.
 
 
 # Changes to Cassandra
 
-Customized versions of the following classes from version 4.0.19 in `src/test`:
+Customized versions of the following classes from version 4.0.20 in `src/test`:
 
 * `org.apache.cassandra.config.YamlConfigurationLoader`: Minor changes to adapt to the incompatible API of the newer version of SnakeYAML used by Spring Boot 3.5.
 * `org.apache.cassandra.utils.ObjectSizes`: Back-ported minor changes from Cassandra 5.0 to adapt to the incompatible API of the newer version of Jamm that works on Java 17.
@@ -41,7 +41,7 @@ Original source files from version 1.0.6 in `src/test` excluding the following p
 
 Uncheck `Use '--release' option` in the project's Java Compiler settings.
 
-Add the JPMS options in https://github.com/apache/cassandra/blob/cassandra-4.0.19/conf/jvm11-clients.options and a few additional ones (for Java 17) to the `.classpath` file of the project:
+Add the JPMS options in https://github.com/apache/cassandra/blob/cassandra-4.0.20/conf/jvm11-clients.options and a few additional ones (for Java 17) to the `.classpath` file of the project:
 
 ```
 <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17">

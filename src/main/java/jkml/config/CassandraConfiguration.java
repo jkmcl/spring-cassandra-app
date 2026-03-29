@@ -11,6 +11,8 @@ import org.springframework.data.cassandra.core.AsyncCassandraOperations;
 import org.springframework.data.cassandra.core.AsyncCassandraTemplate;
 import org.springframework.data.cassandra.core.convert.CassandraConverter;
 import org.springframework.data.cassandra.core.convert.CassandraCustomConversions;
+import org.springframework.data.cassandra.core.cql.AsyncCqlOperations;
+import org.springframework.data.cassandra.core.cql.AsyncCqlTemplate;
 import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
 import org.springframework.data.convert.ReadingConverter;
 import org.springframework.data.convert.WritingConverter;
@@ -30,7 +32,7 @@ class CassandraConfiguration {
 
 	/**
 	 * Based on
-	 * https://github.com/spring-projects/spring-boot/blob/3.4.x/spring-boot-project/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/data/cassandra/CassandraDataAutoConfiguration.java
+	 * https://github.com/spring-projects/spring-boot/blob/3.5.x/spring-boot-project/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/data/cassandra/CassandraDataAutoConfiguration.java
 	 */
 	@Bean
 	@ConditionalOnMissingBean(AsyncCassandraOperations.class)

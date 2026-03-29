@@ -78,8 +78,9 @@ class UserRepositoryTests {
 
 	private static List<User> createRandomUsers(int count) {
 		List<User> list = new ArrayList<>(count);
+		RandomStringUtils rsu = RandomStringUtils.secure();
 		for (int i = 0; i < count; ++i) {
-			list.add(new User(UUID.randomUUID(), RandomStringUtils.randomAlphanumeric(10), RandomStringUtils.randomAlphanumeric(10)));
+			list.add(new User(UUID.randomUUID(), rsu.nextAlphanumeric(10), rsu.nextAlphanumeric(10)));
 		}
 		return list;
 	}
