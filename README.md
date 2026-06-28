@@ -6,7 +6,7 @@ A sample Spring Boot application demonstrating how to use CassandraUnit and an e
 * Spring Boot uses some dependencies of Cassandra but at versions with incompatible method signatures
 
 Features:
-* POM tweaks and customized Cassandra classes to make CassandraUnit and Cassandra 4.0 work with Spring Boot 3.5 on Java 17
+* POM tweaks and customized Cassandra classes to make CassandraUnit and Cassandra 4.0 work with Spring Boot 4.1 on Java 17
 * Custom query methods utilizing secondary indexes
 * A custom repository method that performs bulk insert asynchronously with number of in-flight inserts limited using a semaphore
 * A custom repository base class that provides a insertIfNotExists method that retries on CASWriteUnknownException and partition-oriented methods
@@ -25,7 +25,7 @@ Customized version of `cu-cassandra.yaml` that CassandraUnit reads from the clas
 
 Customized versions of the following classes from version 4.0.20 in `src/test`:
 
-* `org.apache.cassandra.config.YamlConfigurationLoader`: Minor changes to adapt to the incompatible API of the newer version of SnakeYAML used by Spring Boot 3.5.
+* `org.apache.cassandra.config.YamlConfigurationLoader`: Minor changes to adapt to the incompatible API of the newer version of SnakeYAML used by Spring Boot 4.1.
 * `org.apache.cassandra.utils.ObjectSizes`: Back-ported minor changes from Cassandra 5.0 to adapt to the incompatible API of the newer version of Jamm that works on Java 17.
 
 
@@ -43,7 +43,7 @@ Uncheck `Use '--release' option` in the project's Java Compiler settings.
 
 Add the JPMS options in https://github.com/apache/cassandra/blob/cassandra-4.0.20/conf/jvm11-clients.options and a few additional ones (for Java 17) to the `.classpath` file of the project:
 
-```
+```xml
 <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17">
 	<attributes>
 		<attribute name="maven.pomderived" value="true"/>
