@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.1.0</version>
+		<version>4.1.1</version>
 	</parent>
 
 	<groupId>jkml</groupId>
@@ -17,11 +17,10 @@
 
 	<properties>
 		<java.version>17</java.version>
-		<cassandra.version>4.0.20</cassandra.version>
+		<cassandra.version>4.0.21</cassandra.version>
 		<cassandra-unit.version>4.3.1.0</cassandra-unit.version>
 		<jamm.version>0.4.0</jamm.version>
 		<jna.version>5.19.1</jna.version>
-		<failureaccess.version>1.0.3</failureaccess.version>
 	</properties>
 
 	<dependencies>
@@ -33,7 +32,7 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
+			<artifactId>spring-boot-starter-data-cassandra-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
@@ -48,7 +47,7 @@
 					<groupId>org.apache.thrift</groupId>
 					<artifactId>*</artifactId>
 				</exclusion>
-				<!-- Prefer JUnit 5 -->
+				<!-- Prefer JUnit 5+ -->
 				<exclusion>
 					<groupId>junit</groupId>
 					<artifactId>*</artifactId>
@@ -108,7 +107,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<argLine>
-						<!-- From https://github.com/apache/cassandra/blob/cassandra-4.0.20/conf/jvm11-clients.options -->
+						<!-- From https://github.com/apache/cassandra/blob/cassandra-4.0.21/conf/jvm11-clients.options -->
 						--add-exports java.base/jdk.internal.misc=ALL-UNNAMED
 						--add-exports java.base/jdk.internal.ref=ALL-UNNAMED
 						--add-exports java.base/sun.nio.ch=ALL-UNNAMED
