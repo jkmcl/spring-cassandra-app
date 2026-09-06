@@ -1,8 +1,8 @@
 package jkml.scheduling;
 
-class MyTask implements Runnable {
+public class MyTask implements Runnable {
 
-	boolean executed = false;
+	private boolean executed = false;
 
 	public boolean isExecuted() {
 		return executed;

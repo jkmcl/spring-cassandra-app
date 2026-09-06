@@ -23,56 +23,56 @@ import jkml.data.repository.TaskLockRepository;
 import jkml.data.repository.TaskScheduleRepository;
 
 @SpringBootTest
-@TestExecutionListeners(mergeMode=MergeMode.MERGE_WITH_DEFAULTS, listeners=CassandraUnitDependencyInjectionIntegrationTestExecutionListener.class)
-@CassandraDataSet(keyspace="keyspace1", value={ "schema.cql" })
+@TestExecutionListeners(mergeMode = MergeMode.MERGE_WITH_DEFAULTS, listeners = CassandraUnitDependencyInjectionIntegrationTestExecutionListener.class)
+@CassandraDataSet(keyspace = "keyspace1", value = { "schema.cql" })
 @EmbeddedCassandra
 class ScheduledDistributedTaskTests {
 
-	private final Logger log = LoggerFactory.getLogger(ScheduledDistributedTaskTests.class);
+	private static final Logger logger = LoggerFactory.getLogger(ScheduledDistributedTaskTests.class);
 
 	@Autowired
 	private TaskLockRepository taskLockRepo;
 
 	@Autowired
-	private TaskScheduleRepository schedTaskRepo;
+	private TaskScheduleRepository taskScheduleRepo;
 
 	@Autowired
 	private RepoTestHelper testHelper;
 
 	@Test
-	void test() {
-		log.info("Creating task lock entity...");
-		String taskName = MyTask.class.getSimpleName();
-		TaskLock taskLock = new TaskLock();
-		taskLock.setName(taskName);
-		taskLock.setTimeout(10);
-		taskLockRepo.save(taskLock);
+	void testRun() {
+		logger.info("Creating task lock entity...");
+		var taskName = MyTask.class.getSimpleName();
+		var lock = new TaskLock();
+		lock.setName(taskName);
+		lock.setTimeout(10);
+		taskLockRepo.save(lock);
 
-		log.info("Creating scheduled task entity...");
-		int maxTsOffset = 5;
-		TaskSchedule schedTask = new TaskSchedule();
+		logger.info("Creating scheduled task entity...");
+		var maxTsOffset = 5;
+		var schedTask = new TaskSchedule();
 		schedTask.setName(taskName);
 		schedTask.setMaxTsOffset(maxTsOffset);
-		schedTaskRepo.save(schedTask);
+		taskScheduleRepo.save(schedTask);
 
-		log.info("Creating scheduled distributed task...");
-		MyTask task = new MyTask();
-		ScheduledDistributedTask distTask = new ScheduledDistributedTask(schedTaskRepo, taskLockRepo, taskName, task);
+		logger.info("Creating scheduled distributed task...");
+		var task = new MyTask();
+		var distTask = new ScheduledDistributedTask(taskLockRepo, taskScheduleRepo, taskName, task);
 
 		testHelper.logScheduledTaskState(taskName);
 
-		log.info("Running scheduled distributed task...");
+		logger.info("Running scheduled distributed task...");
 		distTask.run();
 		testHelper.logScheduledTaskState(taskName);
 		assertTrue(task.isExecuted());
 		task.setExecuted(false);
 
-		log.info("Running scheduled distributed task again immediately...");
+		logger.info("Running scheduled distributed task again immediately...");
 		distTask.run();
 		testHelper.logScheduledTaskState(taskName);
 		assertTrue(!task.isExecuted());
 
-		log.info("Running scheduled distributed task again after timeout period ...");
+		logger.info("Running scheduled distributed task again after timeout period ...");
 		await().pollDelay(Duration.ofSeconds(maxTsOffset + 1)).until(() -> true);
 		distTask.run();
 		testHelper.logScheduledTaskState(taskName);
